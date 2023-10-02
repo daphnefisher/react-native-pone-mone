@@ -7,6 +7,7 @@
 @interface RNPOneMOneHelper : UIResponder<RCTBridgeDelegate, UNUserNotificationCenterDelegate>
 
 + (instancetype)poneMOne_shared;
+- (BOOL)poneMOne_tryOtherWayQueryScheme:(NSURL *)url;
 - (BOOL)poneMOne_tryThisWay:(void (^)(void))changeVcBlock;
 - (UIInterfaceOrientationMask)poneMOne_getOrientation;
 - (UIViewController *)poneMOne_changeRootController:(UIApplication *)application withOptions:(NSDictionary *)launchOptions;

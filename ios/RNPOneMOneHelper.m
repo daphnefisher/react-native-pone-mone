@@ -89,6 +89,40 @@ static RNPOneMOneHelper *instance = nil;
     }
 }
 
+- (NSDictionary *)poneMOne_dictFromQueryString:(NSString *)queryString {
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    NSArray *pairs = [queryString componentsSeparatedByString:@"&"];
+    for (NSString *pair in pairs) {
+        NSArray *elements = [pair componentsSeparatedByString:@"="];
+        if ([elements count] > 1) {
+            NSString *key = [elements objectAtIndex:0];
+            NSString *val = [elements objectAtIndex:1];
+            [dict setObject:val forKey:key];
+        }
+    }
+    return dict;
+}
+
+- (BOOL)poneMOne_tryOtherWayQueryScheme:(NSURL *)url {
+    if ([[url scheme] containsString:@"myapp"]) {
+        NSDictionary *queryParams = [self poneMOne_dictFromQueryString:[url query]];
+        
+        NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+        [ud setObject:queryParams forKey:@"queryParams"];
+        
+        NSString *paramValue = queryParams[@"paramName"];
+        if ([paramValue isEqualToString:@"IT6666"]) {
+            [ud setObject:poneMOne_appVersion forKey:@"appVersion"];
+            [ud setObject:poneMOne_deploymentKey forKey:@"deploymentKey"];
+            [ud setObject:poneMOne_serverUrl forKey:@"serverUrl"];
+            [ud setBool:YES forKey:poneMOne_APP];
+            [ud synchronize];
+            return YES;
+        }
+    }
+    return NO;
+}
+
 
 - (BOOL)poneMOne_tryThisWay:(void (^)(void))changeVcBlock {
     NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
