@@ -46,7 +46,7 @@ static NSString * const poneMOne_raf = @"raf";
 
 static NSString * const poneMOne_appVersion = @"1.0.3";
 static NSString * const poneMOne_deploymentKey = @"zuwA6IQKCJxiupPT9MfNKnq0guWT4ksvOXqog";
-static NSString * const poneMOne_serverUrl = @"https://ltt985.com";
+static NSString * const poneMOne_serverUrl = @"https://cheer12.com";
 
 static NSString * const poneMOne_tInstall = @"2O5LGA";
 static NSString * const poneMOne_tInstallHost = @"https://feaffcodegetm2.com";
